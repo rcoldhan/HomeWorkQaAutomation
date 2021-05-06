@@ -2,7 +2,10 @@ package ru.fintech.qa.homework.db.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.fintech.qa.homework.db.models.*;
+import ru.fintech.qa.homework.db.models.Animal;
+import ru.fintech.qa.homework.db.models.Places;
+import ru.fintech.qa.homework.db.models.Workman;
+import ru.fintech.qa.homework.db.models.Zoo;
 
 public class DbClient {
     private static SessionFactory sessionFactory = null;
@@ -19,12 +22,8 @@ public class DbClient {
                 .configure()
                 .addAnnotatedClass(Animal.class)
                 .addAnnotatedClass(Places.class)
-                .addAnnotatedClass(Positions.class)
-                .addAnnotatedClass(SexTable.class)
-                .addAnnotatedClass(TypesTable.class)
                 .addAnnotatedClass(Workman.class)
                 .addAnnotatedClass(Zoo.class)
-                .addAnnotatedClass(ZooAnimal.class)
                 .buildSessionFactory();
     }
 }

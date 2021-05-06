@@ -6,22 +6,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "places")
-public class Places {
+@Table(name = "places")
+public final class Places {
     @Id
-    int id;
+    private int id;
     @Column(name = "\"row\"")
-    int row;
-    @Column (name = "place_num")
-    int placeNum;
-    @Column (name = "name")
-    String name;
+    private int row;
+    @Column(name = "place_num")
+    private int placeNum;
+    @Column(name = "name")
+    private String name;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -29,7 +29,7 @@ public class Places {
         return row;
     }
 
-    public void setRow(int row) {
+    public void setRow(final int row) {
         this.row = row;
     }
 
@@ -37,7 +37,7 @@ public class Places {
         return placeNum;
     }
 
-    public void setPlaceNum(int placeNum) {
+    public void setPlaceNum(final int placeNum) {
         this.placeNum = placeNum;
     }
 
@@ -45,17 +45,7 @@ public class Places {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Places{" +
-                "id=" + id +
-                ", row=" + row +
-                ", placeNum=" + placeNum +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

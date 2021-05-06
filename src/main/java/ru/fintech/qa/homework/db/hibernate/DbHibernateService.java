@@ -2,6 +2,7 @@ package ru.fintech.qa.homework.db.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import ru.fintech.qa.homework.db.models.Zoo;
 
 import java.math.BigInteger;
@@ -12,38 +13,44 @@ public class DbHibernateService {
         return sessionFactory.openSession();
     }
 
-    public final BigInteger countRows(String sqlQuery, String tableName) {
+    public final BigInteger countRows(final String sqlQuery, final String tableName) {
         Session session = DbHibernateService.openSession();
         BigInteger result = (BigInteger) session.createNativeQuery(sqlQuery + tableName).uniqueResult();
         session.close();
         return result;
     }
 
-    public final void addRowWithSameID(int id) {
+    public final void addRowWithSameID(final String sqlQuery) {
         Session session = DbHibernateService.openSession();
+        Transaction transaction = session.beginTransaction();
         session
-                .createNativeQuery("insert into animal (id) values (" + id + ")")
+                .createNativeQuery(sqlQuery)
                 .executeUpdate();
+        transaction.commit();
         session.close();
     }
 
-    public final void addRowWithNameNull(String workmanName) {
+    public final void addRowWithNameNull(final String sqlQuery) {
         Session session = DbHibernateService.openSession();
+        Transaction transaction = session.beginTransaction();
         session
-                .createNativeQuery("insert into workman (\"name\") values (" + workmanName + ")")
+                .createNativeQuery(sqlQuery)
                 .executeUpdate();
+        transaction.commit();
         session.close();
     }
 
-    public final void addOneRow(int id) {
+    public final void addOneRow(final String sqlQuery) {
         Session session = DbHibernateService.openSession();
+        Transaction transaction = session.beginTransaction();
         session
-                .createNativeQuery("insert into places (id) values (" + id + ")")
+                .createNativeQuery(sqlQuery)
                 .executeUpdate();
+        transaction.commit();
         session.close();
     }
 
-    public static String getNameByID(int id, String sqlQuery) {
+    public static String getNameByID(final int id, final String sqlQuery) {
         Session session = DbHibernateService.openSession();
         String result = session.createNativeQuery(sqlQuery + id, Zoo.class)
                 .getResultList().get(0).getName();
