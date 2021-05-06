@@ -19,7 +19,7 @@ public class HibernateTests {
      * В таблице public.animal ровно 10 записей.
      */
     @Test
-    void countRowsFromAnimal() {
+    void tenRowsFromAnimal() {
         Assertions.assertEquals(BigInteger.valueOf(10), new DbHibernateService()
                 .countRows("select count(*) from ", "animal"));
     }
@@ -48,7 +48,7 @@ public class HibernateTests {
      * Если в таблицу public.places добавить еще одну строку, то в ней будет 6 строк.
      */
     @Test
-    void ifAddOneRowThenSixRows() {
+    void ifAddOneMoreRowThenSixRows() {
         new DbHibernateService().addOneRow("insert into places (id) values (" + 6 + ")");
         Assertions.assertEquals(BigInteger.valueOf(6), new DbHibernateService()
                 .countRows("select count(*) from ", "places"));
