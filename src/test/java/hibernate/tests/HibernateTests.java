@@ -4,6 +4,8 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import ru.fintech.qa.homework.db.hibernate.DbHibernateService;
 import ru.fintech.qa.homework.utils.BeforeUtils;
 
@@ -27,11 +29,12 @@ public class HibernateTests {
     /**
      * В таблицу public.animal нельзя добавить строку с индексом от 1 до 10 включительно.
      */
-    @Test
-    void cantAddRowWithIndexOneToTenToAnimal() {
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
+    void cantAddRowWithIndexOneToTenToAnimal(final int number) {
         Assertions.assertThrows(ConstraintViolationException.class,
                 () -> new DbHibernateService()
-                        .addRowWithSameID("insert into animal (id) values (" + 10 + ")"));
+                        .addRowWithSameID("insert into animal (id) values (" + number + ")"));
     }
 
     /**
